@@ -50,7 +50,7 @@ struct AuthorService {
                 "uid": authResult.user.uid,
                 "username": authResult.user.displayName ?? ""]
                 
-                print("successfully saved")
+                print("successfully saved - consider more detail as much as possibly")
                                                               
                 Collection_User.document(uid).setData(data, completion: completion)
             })
