@@ -7,12 +7,53 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
 
 struct AuthorService {
     static func loginUser(withEmail email: String, password: String, completion: AuthDataResultCallback?) {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
     }
     
+    static func loginByGoogle(presentingVC: UIViewController, completion: @escaping CompletionHandlerOptionalErrorToVoid) {
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: presentingVC, callback: { (user, error) in
+            
+            if let error = error {
+                print("DEBUG failed to user \(error.localizedDescription)")
+                return
+              }
+            
+            guard let authentication = user?.authentication,
+                  let idToken = authentication.idToken
+            else {return}
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+            
+            Auth.auth().signIn(with: credential, completion: { (authResult, error) in
+                
+                if let error = error {
+                    print("DEBUG failed to user \(error.localizedDescription)")
+                    return
+                  }
+                
+                guard let authResult = authResult else {return}
+                let uid = authResult.user.uid
+                
+                let data: [String: Any] =
+                ["email": authResult.user.email ?? "",
+                "fullname": authResult.user.displayName ?? "",
+                "profileImageUrl": authResult.user.photoURL?.absoluteString ?? "",
+                "uid": authResult.user.uid,
+                "username": authResult.user.displayName ?? ""]
+                
+                Collection_User.document(uid).setData(data, completion: completion)
+            })
+        })
+    }
     
     static func registerUser(withCredential: AuthorIDs, completion: @escaping CompletionHandlerOptionalErrorToVoid) {
         
@@ -34,7 +75,6 @@ struct AuthorService {
                 
                 Collection_User.document(uid).setData(data, completion: completion)
             })
-            
         })
     }
     

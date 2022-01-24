@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 protocol AuthenticationDelegate: AnyObject {
     func anuthenticalDidComplete()
@@ -99,7 +101,16 @@ class LoginVC: UIViewController {
     }
     
     @objc func handleGoogleLogin() {
-        
+        AuthorService.loginByGoogle(presentingVC: self, completion: { (error) in
+            
+            if let error = error {
+                print("DEBUG failed to login the user \(error.localizedDescription)")
+                return
+            }
+            
+            self.delegate?.anuthenticalDidComplete()
+            
+        })
     }
     
     @objc func handleFacebookLogin() {
