@@ -15,6 +15,7 @@ target 'Instagram' do
   pod 'FirebaseMessaging', '~> 8.10'
   pod 'FirebaseAuth', '~> 8.10'
   pod 'GoogleSignIn', '~> 6.1'
+  pod 'FBSDKLoginKit', '~> 12.3' 
   pod 'ActiveLabel', '~> 1.1'
   pod 'SDWebImage', '~> 5.12'
   pod 'JGProgressHUD', '~> 2.2'

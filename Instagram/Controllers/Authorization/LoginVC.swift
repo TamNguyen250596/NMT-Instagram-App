@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 protocol AuthenticationDelegate: AnyObject {
     func anuthenticalDidComplete()
@@ -57,6 +59,7 @@ class LoginVC: UIViewController {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "google-icon"), for: .normal)
         btn.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
+        
         return btn
     }()
     
@@ -115,6 +118,27 @@ class LoginVC: UIViewController {
     
     @objc func handleFacebookLogin() {
         
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: ["public_profile"], from: self) {
+            result, error in
+            
+            if let error = error {
+                print("Encountered Erorr: \(error)")
+            } else if let result = result, result.isCancelled {
+                print("Cancelled")
+            } else {
+                
+                AuthorService.loginByFacebook(completion: { (error) in
+                    
+                    if let error = error {
+                        print("DEBUG failed to login the user \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    self.delegate?.anuthenticalDidComplete()
+                })
+            }
+        }
     }
     
     @objc func openResetPasswordVC() {
@@ -199,3 +223,4 @@ extension LoginVC: ResetPasswordVCDelegate {
         self.showMessage(withTitle: "Success", message: "You changed your email successfully!")
     }
 }
+

@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import UserNotifications
 import GoogleSignIn
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = TabBarViewController()
         window?.makeKeyAndVisible()
+        
+        FBSDKCoreKit.ApplicationDelegate.shared.application(
+                    application,
+                    didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     
@@ -27,7 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
       -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
+     GIDSignIn.sharedInstance.handle(url)
+          
+    ApplicationDelegate.shared.application(application, open: url,
+    sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+    annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+              
+    return true
     }
 }
 
