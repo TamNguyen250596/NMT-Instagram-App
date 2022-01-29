@@ -122,6 +122,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: ProfileHeaderDelegate
 extension ProfileViewController: ProfileHeaderDelegate {
+    
     func headerProfile(_profileHeader: HeaderProfileCell, didTapActionButtonFor user: User) {
         if user.isCurrentUser {
             print("DEBUG: Profile of the current account")
@@ -145,5 +146,18 @@ extension ProfileViewController: ProfileHeaderDelegate {
             })
         }
     }
-
+    
+    func handleEventFromChatButton(_profileHeader: HeaderProfileCell, didTapActionButtonFor user: User) {
+        showLoader(true)
+        
+        MessageService.createMessageID(to: user, completiion: { (key) in
+            
+            let targetVC = ChatViewController()
+            targetVC.receivedUser = user
+            targetVC.messageId = key
+            self.navigationController?.pushViewController(targetVC, animated: true)
+            
+        })
+        showLoader(false)
+    }
 }

@@ -202,7 +202,7 @@ class LoginVC: UIViewController {
         stackViewIcon.distribution = .fillEqually
         
         view.addSubview(stackViewIcon)
-        stackViewIcon.centerX(inView: orSeparatorView, topAnchor: orSeparatorView.bottomAnchor, paddingTop: 35)
+        stackViewIcon.centerX(inView: orSeparatorView, topAnchor: orSeparatorView.bottomAnchor, paddingTop: 45)
         
         view.addSubview(createNewAccount)
         createNewAccount.centerX(inView: view)
@@ -217,10 +217,14 @@ class LoginVC: UIViewController {
 
 }
 
+//MARK: ResetPasswordVCDelegate
 extension LoginVC: ResetPasswordVCDelegate {
     func handleEventFromResetButtn(form controller: ResetPasswordVC) {
         self.navigationController?.popViewController(animated: true)
         self.showMessage(withTitle: "Success", message: "You changed your email successfully!")
     }
 }
+
+
+
 

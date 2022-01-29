@@ -14,7 +14,7 @@ class ProfileCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .orange
+        imageView.backgroundColor = .lightGray
         imageView.isUserInteractionEnabled = true
         return imageView
     }()

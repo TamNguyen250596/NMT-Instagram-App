@@ -20,6 +20,12 @@
 		E9286EFA278E720D00E90C25 /* UploadPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9286EF9278E720C00E90C25 /* UploadPostController.swift */; };
 		E9286F01278E7F0900E90C25 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9286F00278E7F0900E90C25 /* CustomTextView.swift */; };
 		E9286F05278ECBE400E90C25 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9286F04278ECBE400E90C25 /* PostService.swift */; };
+		E9541B5B27A0EEE500526F76 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B5A27A0EEE500526F76 /* ChatViewController.swift */; };
+		E9541B5D27A11EF600526F76 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B5C27A11EF600526F76 /* MessageService.swift */; };
+		E9541B5F27A13F0300526F76 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B5E27A13F0300526F76 /* Message.swift */; };
+		E9541B6127A17E0E00526F76 /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B6027A17E0D00526F76 /* SenderCell.swift */; };
+		E9541B6327A1819100526F76 /* ChatCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B6227A1819000526F76 /* ChatCellViewModel.swift */; };
+		E9541B6927A2813D00526F76 /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B6827A2813D00526F76 /* ReceiverCell.swift */; };
 		E979725D2789C0090055F80A /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979725C2789C0090055F80A /* ProfileCell.swift */; };
 		E97972602789C0620055F80A /* HeaderProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979725F2789C0620055F80A /* HeaderProfileCell.swift */; };
 		E9797265278BC1DA0055F80A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9797264278BC1D90055F80A /* UserService.swift */; };
@@ -77,6 +83,12 @@
 		E9286EF9278E720C00E90C25 /* UploadPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostController.swift; sourceTree = "<group>"; };
 		E9286F00278E7F0900E90C25 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		E9286F04278ECBE400E90C25 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		E9541B5A27A0EEE500526F76 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		E9541B5C27A11EF600526F76 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		E9541B5E27A13F0300526F76 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E9541B6027A17E0D00526F76 /* SenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
+		E9541B6227A1819000526F76 /* ChatCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellViewModel.swift; sourceTree = "<group>"; };
+		E9541B6827A2813D00526F76 /* ReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
 		E979725C2789C0090055F80A /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		E979725F2789C0620055F80A /* HeaderProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCell.swift; sourceTree = "<group>"; };
 		E9797264278BC1D90055F80A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -176,6 +188,24 @@
 			path = TextViews;
 			sourceTree = "<group>";
 		};
+		E9541B5927A0EE9300526F76 /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				E9E78E9427829C9B00FD2283 /* ProfileViewController.swift */,
+				E9541B5A27A0EEE500526F76 /* ChatViewController.swift */,
+			);
+			path = ProfileVC;
+			sourceTree = "<group>";
+		};
+		E9541B6727A280CF00526F76 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				E9541B6027A17E0D00526F76 /* SenderCell.swift */,
+				E9541B6827A2813D00526F76 /* ReceiverCell.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		E979725E2789C0100055F80A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +218,7 @@
 		E9AB231E2783E21100C5CF6F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E9541B6727A280CF00526F76 /* Chat */,
 				E979725E2789C0100055F80A /* Profile */,
 				E9AB23262783F5A100C5CF6F /* FeedNewsCell.swift */,
 				E979726A278C0E440055F80A /* UserCell.swift */,
@@ -280,6 +311,7 @@
 				E901078F279188DE00D0936A /* CommentService.swift */,
 				E9C6E60E2795050E009CDDDE /* LikeService.swift */,
 				E9C6E616279660BB009CDDDE /* NotificationService.swift */,
+				E9541B5C27A11EF600526F76 /* MessageService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -291,9 +323,9 @@
 				E901078527910DE100D0936A /* FeedVC */,
 				E901078627910E0900D0936A /* ImagePickerVC */,
 				E9E78E82278290D400FD2283 /* TabBarViewController.swift */,
+				E9541B5927A0EE9300526F76 /* ProfileVC */,
 				E9E78E8827829C4A00FD2283 /* SearchViewController.swift */,
 				E9E78E9027829C7F00FD2283 /* NotificationViewController.swift */,
-				E9E78E9427829C9B00FD2283 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -309,6 +341,7 @@
 				E901078D27917E5900D0936A /* CommentCellViewModel.swift */,
 				E9C6E61827967F43009CDDDE /* NotificationCellViewModel.swift */,
 				E9C6E6202796A578009CDDDE /* UserLikedCellVM.swift */,
+				E9541B6227A1819000526F76 /* ChatCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -338,6 +371,7 @@
 				E901078B27917A5000D0936A /* Comment.swift */,
 				E9C6E6102795795F009CDDDE /* Liked.swift */,
 				E9C6E614279659DB009CDDDE /* Notification.swift */,
+				E9541B5E27A13F0300526F76 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -472,6 +506,8 @@
 				E901078A27912E3200D0936A /* CommentInputAccessoryView.swift in Sources */,
 				E9AB233927858E5900C5CF6F /* CustomTextField.swift in Sources */,
 				E9AB23272783F5A100C5CF6F /* FeedNewsCell.swift in Sources */,
+				E9541B5F27A13F0300526F76 /* Message.swift in Sources */,
+				E9541B5B27A0EEE500526F76 /* ChatViewController.swift in Sources */,
 				E9C6E6212796A578009CDDDE /* UserLikedCellVM.swift in Sources */,
 				E9286EFA278E720D00E90C25 /* UploadPostController.swift in Sources */,
 				E9E78E83278290D400FD2283 /* TabBarViewController.swift in Sources */,
@@ -492,6 +528,7 @@
 				E9E78E8627829C1300FD2283 /* FeedViewController.swift in Sources */,
 				E9286F01278E7F0900E90C25 /* CustomTextView.swift in Sources */,
 				E9C6E6112795795F009CDDDE /* Liked.swift in Sources */,
+				E9541B6327A1819100526F76 /* ChatCellViewModel.swift in Sources */,
 				E9010788279111B800D0936A /* CommentCell.swift in Sources */,
 				E9E78E9627829C9B00FD2283 /* ProfileViewController.swift in Sources */,
 				E98E728A2787FB3F0087A64C /* AuthorIDs.swift in Sources */,
@@ -501,10 +538,12 @@
 				E9010790279188DE00D0936A /* CommentService.swift in Sources */,
 				E97972602789C0620055F80A /* HeaderProfileCell.swift in Sources */,
 				E979726D278C22E90055F80A /* UserCellViewModel.swift in Sources */,
+				E9541B5D27A11EF600526F76 /* MessageService.swift in Sources */,
 				E9AB23362785721700C5CF6F /* GradientColor.swift in Sources */,
 				E9C6E626279A44BA009CDDDE /* ResetPasswordVC.swift in Sources */,
 				E9797265278BC1DA0055F80A /* UserService.swift in Sources */,
 				E9C6F14A279E5A8A00151E7F /* OrView.swift in Sources */,
+				E9541B6927A2813D00526F76 /* ReceiverCell.swift in Sources */,
 				E9E78E8A27829C4A00FD2283 /* SearchViewController.swift in Sources */,
 				E9C6E61927967F43009CDDDE /* NotificationCellViewModel.swift in Sources */,
 				E901077D278FBE6C00D0936A /* Post.swift in Sources */,
@@ -515,6 +554,7 @@
 				E979725D2789C0090055F80A /* ProfileCell.swift in Sources */,
 				E9010780278FC79F00D0936A /* FeedCellViewModel.swift in Sources */,
 				E9E78E6727828F4600FD2283 /* AppDelegate.swift in Sources */,
+				E9541B6127A17E0E00526F76 /* SenderCell.swift in Sources */,
 				E98E72882787F7460087A64C /* AuthorService.swift in Sources */,
 				E9AB231D2783E10300C5CF6F /* Constants.swift in Sources */,
 			);

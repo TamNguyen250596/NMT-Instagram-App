@@ -13,7 +13,7 @@ protocol CommentInputAccessoryViewDelegate: AnyObject {
 
 class CommentInputAccessoryView: UIView {
     //MARK: Properties
-    private let commentView: CustomTextView = {
+    let commentView: CustomTextView = {
         let textView = CustomTextView()
         textView.placeholder = "Enter comment ... "
         textView.textColor = .darkText

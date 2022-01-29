@@ -87,7 +87,6 @@ class CommentViewController: UIViewController {
         tableView.register(CommentCell.self, forCellReuseIdentifier: CellID_CommentCell)
         tableView.keyboardDismissMode = .interactive
     }
-
 }
 
 // MARK: - Table view data source

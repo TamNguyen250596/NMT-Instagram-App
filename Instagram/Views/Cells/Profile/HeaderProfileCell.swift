@@ -10,6 +10,7 @@ import SDWebImage
 
 protocol ProfileHeaderDelegate: AnyObject {
     func headerProfile(_profileHeader: HeaderProfileCell, didTapActionButtonFor user: User)
+    func handleEventFromChatButton(_profileHeader: HeaderProfileCell, didTapActionButtonFor user: User)
 }
 
 class HeaderProfileCell: UICollectionReusableView {
@@ -56,11 +57,36 @@ class HeaderProfileCell: UICollectionReusableView {
         let btn = UIButton()
         btn.setTitle("Edit Profile", for: .normal)
         btn.setTitleColor(.black, for: .normal)
-        btn.layer.cornerRadius = 3
+        btn.layer.cornerRadius = 5
         btn.layer.borderColor = UIColor.lightGray.cgColor
         btn.layer.borderWidth = 0.5
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         btn.addTarget(self, action: #selector(handleEditProfileFollowTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var chatBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "send-icon"), for: .normal)
+        btn.setTitle(" Message", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.layer.cornerRadius = 5
+        btn.backgroundColor = UIColor(
+            red: 232/255, green: 104/255,
+            blue: 47/255, alpha: 0.9)
+        btn.layer.borderColor = UIColor.lightGray.cgColor
+        btn.layer.borderWidth = 0.5
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        btn.addTarget(self, action: #selector(handleChatTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private let gearBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "gear-icon"), for: .normal)
+        btn.layer.cornerRadius = 5
+        btn.layer.borderColor = UIColor.lightGray.cgColor
+        btn.layer.borderWidth = 0.5
         return btn
     }()
     
@@ -108,16 +134,26 @@ class HeaderProfileCell: UICollectionReusableView {
         stackView.centerY(inView: profileHeaderImage)
         stackView.anchor(left: profileHeaderImage.rightAnchor, right: rightAnchor, paddingLeft: 12, paddingRight: 12)
         
-        addSubview(editProfileBtn)
-        editProfileBtn.anchor(top: userNameLbl.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 10, paddingRight: 10, height: 50)
+        let stackViewOfBtnsLine1 = UIStackView(arrangedSubviews: [editProfileBtn, chatBtn, gearBtn])
+        stackViewOfBtnsLine1.axis = .horizontal
+        stackViewOfBtnsLine1.spacing = 10
         
-        let stackViewOfBtns = UIStackView(arrangedSubviews: [gridDisplayBtn, listDisplayBtn, ribbonDisplayBtn])
-        stackViewOfBtns.axis = .horizontal
-        stackViewOfBtns.spacing = 0
-        stackViewOfBtns.distribution = .fillEqually
+        addSubview(stackViewOfBtnsLine1)
+        stackViewOfBtnsLine1.anchor(top: userNameLbl.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 10, paddingRight: 10, height: 50)
         
-        addSubview(stackViewOfBtns)
-        stackViewOfBtns.anchor(top: editProfileBtn.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        editProfileBtn.setWidth((self.frame.width - 90) * 0.5)
+        
+        chatBtn.setWidth((self.frame.width - 90) * 0.5)
+        
+        gearBtn.setWidth(50)
+        
+        let stackViewOfBtnsLine2 = UIStackView(arrangedSubviews: [gridDisplayBtn, listDisplayBtn, ribbonDisplayBtn])
+        stackViewOfBtnsLine2.axis = .horizontal
+        stackViewOfBtnsLine2.spacing = 0
+        stackViewOfBtnsLine2.distribution = .fillEqually
+        
+        addSubview(stackViewOfBtnsLine2)
+        stackViewOfBtnsLine2.anchor(top: editProfileBtn.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 5, paddingRight: 0)
     }
     
     required init?(coder: NSCoder) {
@@ -129,6 +165,12 @@ class HeaderProfileCell: UICollectionReusableView {
         guard let viewModel = viewModel else {return}
 
         delegate?.headerProfile(_profileHeader: self, didTapActionButtonFor: viewModel.user)
+    }
+    
+    @objc func handleChatTapped() {
+        guard let viewModel = viewModel else {return}
+        
+        delegate?.handleEventFromChatButton(_profileHeader: self, didTapActionButtonFor: viewModel.user)
     }
     
     //MARK: Helpers

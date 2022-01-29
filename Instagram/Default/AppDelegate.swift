@@ -13,9 +13,12 @@ import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    //MARK: Properties
     var window: UIWindow?
     
+    //MARK: App cycle
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -25,9 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKCoreKit.ApplicationDelegate.shared.application(
                     application,
                     didFinishLaunchingWithOptions: launchOptions)
+        
         return true
     }
     
+    //MARK: Helpers
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
