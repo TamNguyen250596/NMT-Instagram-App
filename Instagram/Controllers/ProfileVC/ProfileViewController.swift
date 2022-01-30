@@ -12,7 +12,6 @@ class ProfileViewController: UICollectionViewController {
     //MARK: Properties
     private var posts = [Post]()
     private var user: User
-    lazy var currentUser = user
         
     
     //MARK: View cycle
@@ -124,6 +123,9 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 extension ProfileViewController: ProfileHeaderDelegate {
     
     func headerProfile(_profileHeader: HeaderProfileCell, didTapActionButtonFor user: User) {
+        guard let tabVC = self.tabBarController as? TabBarViewController else {return}
+        guard let currentUser = tabVC.user else {return}
+        
         if user.isCurrentUser {
             print("DEBUG: Profile of the current account")
         } else if user.isFollowed {
@@ -140,7 +142,7 @@ extension ProfileViewController: ProfileHeaderDelegate {
                 self.fetchUserStats()
                 self.collectionView.reloadData()
                 
-                NotificationService.uploadNotification(fromCurrentUser: self.currentUser, toUser: user.uid, type: .follow)
+                NotificationService.uploadNotification(fromCurrentUser: currentUser, toUser: user.uid, type: .follow)
                 
                 PostService.compilePostID(uid: user.uid, didFollow: true)
             })

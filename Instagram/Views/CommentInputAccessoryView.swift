@@ -13,15 +13,16 @@ protocol CommentInputAccessoryViewDelegate: AnyObject {
 
 class CommentInputAccessoryView: UIView {
     //MARK: Properties
-    let commentView: CustomTextView = {
+    private lazy var commentView: CustomTextView = {
         let textView = CustomTextView()
         textView.placeholder = "Enter comment ... "
         textView.textColor = .darkText
         textView.font = UIFont.systemFont(ofSize: 16)
-        textView.isScrollEnabled = true
+        textView.isScrollEnabled = false
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 0.5
         textView.layer.cornerRadius = 16
+        textView.delegate = self
         textView.positionShouldCenter = true
         return textView
     }()
@@ -34,6 +35,12 @@ class CommentInputAccessoryView: UIView {
         btn.addTarget(self, action: #selector(handleTapPost), for: .touchUpInside)
         return btn
     }()
+    
+    override var intrinsicContentSize: CGSize {
+        
+        let textSize = commentView.sizeThatFits(CGSize(width: commentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        return CGSize(width: self.bounds.width, height: textSize.height)
+    }
     
     weak var delegate: CommentInputAccessoryViewDelegate?
     
@@ -67,10 +74,34 @@ class CommentInputAccessoryView: UIView {
         delegate?.handleEventFromPostButton(from: self, withComment: commentView.text)
     }
     
-    func clearTextTyped() {
+    func resetTextView() {
         commentView.text.removeAll()
         commentView.placeholderLbl.isHidden = false
+        self.invalidateIntrinsicContentSize()
     }
 }
+
+//MARK: TextViewDelegate
+extension CommentInputAccessoryView: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if self.intrinsicContentSize.height < 120 {
+            
+            self.invalidateIntrinsicContentSize()
+            
+        } else {
+            
+            commentView.isScrollEnabled = true
+            self.setDimensions(height: 120, width: frame.width)
+            
+        }
+        
+    }
+    
+}
+
+
+
 
 

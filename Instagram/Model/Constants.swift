@@ -41,7 +41,6 @@ let Post_Likes = "post-likes"
 let Post_Comments = "post-comments"
 let Message_Total = "message-total"
 let Message_Unread = "message-unread"
-let Message_Sent = "message-sent"
 
 //MARK: Notification name
 let Notification_User_Did_Tap_Like_Button = NSNotification.Name("notificationOfUserDidTapLikeButton")

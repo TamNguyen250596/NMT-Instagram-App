@@ -198,7 +198,6 @@ extension FeedViewController: FeedNewsCellDelegate {
     func handleEventFromUsernameButton(from cell: FeedNewsCell, with post: Post) {
         UserService.fetchUser(withUserID: post.ownerId, completion: { (user) in
             let targetVC = ProfileViewController(user: user)
-            targetVC.currentUser = self.currentUser
             self.navigationController?.pushViewController(targetVC, animated: true)
         })
     }

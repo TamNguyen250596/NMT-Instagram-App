@@ -15,11 +15,11 @@ enum NotificationType: Int {
     var notificationMessage: String {
         switch self {
         case .like:
-            return "liked your post:"
+            return "liked your post."
         case .follow:
-            return "started following you:"
+            return "started following you."
         case .comment:
-            return "comment on your post:"
+            return "comment on your post."
         }
     }
 }

@@ -39,12 +39,19 @@ struct NotificationCellViewModel {
         return notification.isFollowed ? .darkText : .white
     }
     
-    var timestampString: String? {
+    var timestampString: NSAttributedString? {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
         formatter.maximumUnitCount = 1
         formatter.unitsStyle = .abbreviated
-        return formatter.string(from: notification.timestamp.dateValue(), to: .now)
+        let string = formatter.string(from: notification.timestamp.dateValue(), to: .now)
+        
+        let attributedText = NSMutableAttributedString(
+            string: " \(string ?? "")",
+            attributes: [.font: UIFont.systemFont(ofSize: 12),
+                         .foregroundColor: UIColor.lightGray])
+        
+        return attributedText
     }
     
     var infoTxt: NSAttributedString {
@@ -60,11 +67,7 @@ struct NotificationCellViewModel {
             attributes: [.font: UIFont.systemFont(ofSize: 12),
                          .foregroundColor: UIColor.lightGray]))
         
-        attributedText.append(NSMutableAttributedString(
-            string: " \(timestampString ?? "")",
-            attributes: [.font: UIFont.systemFont(ofSize: 12),
-                         .foregroundColor: UIColor.lightGray]))
-        
         return attributedText
     }
+    
 }

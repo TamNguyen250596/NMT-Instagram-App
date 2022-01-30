@@ -149,8 +149,8 @@ extension UIView {
     func fillSuperview() {
         translatesAutoresizingMaskIntoConstraints = false
         guard let view = superview else { return }
-        anchor(top: view.topAnchor, left: view.leftAnchor,
-               bottom: view.bottomAnchor, right: view.rightAnchor)
+        anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
+               bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
     }
 
 }

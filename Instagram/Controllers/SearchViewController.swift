@@ -37,6 +37,7 @@ class SearchViewController: UIViewController {
         fetchPosts()
     }
     
+    
     //MARK: API
     func fetchUsers() {
         UserService.fetchAllUsers(completion: { (users) in
@@ -70,6 +71,7 @@ class SearchViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.fillSuperview()
+        
     }
     
     func configureSearchController() {
@@ -79,6 +81,7 @@ class SearchViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 

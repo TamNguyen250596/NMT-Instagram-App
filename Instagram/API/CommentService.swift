@@ -24,7 +24,7 @@ struct CommentService {
         var comments = [Comment]()
         let query = Collection_Post.document(postID)
             .collection(Post_Comments)
-            .order(by: "timestamp", descending: true)
+            .order(by: "timestamp", descending: false)
         
         query.addSnapshotListener({ (snapshot, error) in
             

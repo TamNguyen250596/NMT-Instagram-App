@@ -20,7 +20,7 @@ class UserCell: UITableViewCell {
         let userAvatar = UIImageView()
         userAvatar.contentMode = .scaleAspectFill
         userAvatar.clipsToBounds = true
-        userAvatar.backgroundColor = .blue
+        userAvatar.backgroundColor = .lightGray
         userAvatar.isUserInteractionEnabled = true
         return userAvatar
     }()

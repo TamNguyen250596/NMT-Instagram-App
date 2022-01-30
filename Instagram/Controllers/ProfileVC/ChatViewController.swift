@@ -105,7 +105,9 @@ class ChatViewController: UIViewController {
     
     //MARK: Actions
     @objc func handleBack() {
-        navigationController?.popViewController(animated: true)
+        
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
     //MARK: Helpers
@@ -115,7 +117,7 @@ class ChatViewController: UIViewController {
         
         navigationController?.navigationBar.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Feed", style: .plain,
+            title: "Profile", style: .plain,
             target: self, action: #selector(handleBack))
         
         view.addSubview(tableView)
@@ -172,7 +174,7 @@ extension ChatViewController: CommentInputAccessoryViewDelegate {
     func handleEventFromPostButton(from view: CommentInputAccessoryView, withComment comment: String) {
         
         MessageService.sendMessage(with: comment, into: messageId)
-        view.clearTextTyped()
+        view.resetTextView()
     }
 }
 

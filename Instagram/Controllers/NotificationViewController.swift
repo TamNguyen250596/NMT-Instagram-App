@@ -52,7 +52,7 @@ class NotificationViewController: UITableViewController {
         title = "Notification"
         
         tableView.register(NotificationCell.self, forCellReuseIdentifier: CellID_NotificationCell)
-        tableView.rowHeight = 60
+        tableView.rowHeight = 65
         tableView.separatorColor = .clear
         tableView.refreshControl = refresher
         

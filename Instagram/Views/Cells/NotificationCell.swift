@@ -28,9 +28,11 @@ class NotificationCell: UITableViewCell {
     
     private let infoLbl: UILabel = {
         let label = UILabel()
-        label.text = "I have a notification"
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .darkText
+        return label
+    }()
+    
+    private let notificationDate: UILabel = {
+        let label = UILabel()
         return label
     }()
     
@@ -75,8 +77,13 @@ class NotificationCell: UITableViewCell {
         userAvatar.setDimensions(height: 50, width: 50)
         userAvatar.layer.cornerRadius = 50/2
         
-        contentView.addSubview(infoLbl)
-        infoLbl.centerY(inView: userAvatar, leftAnchor: userAvatar.rightAnchor, paddingLeft: 10, constant: 1)
+        let stackView = UIStackView(arrangedSubviews: [infoLbl, notificationDate])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        contentView.addSubview(stackView)
+        stackView.centerY(inView: userAvatar, leftAnchor: userAvatar.rightAnchor, paddingLeft: 10, constant: 1)
+        stackView.anchor(right: rightAnchor, paddingRight: 70)
         
         contentView.addSubview(followBtn)
         followBtn.centerY(inView: self)
@@ -115,6 +122,7 @@ class NotificationCell: UITableViewCell {
         
         userAvatar.sd_setImage(with: viewModel.profileImgUrl)
         infoLbl.attributedText = viewModel.infoTxt
+        notificationDate.attributedText = viewModel.timestampString
         postImageView.sd_setImage(with: viewModel.postImgUrl)
         postImageView.isHidden = viewModel.postImgIsShouldHide
         followBtn.isHidden = !viewModel.postImgIsShouldHide

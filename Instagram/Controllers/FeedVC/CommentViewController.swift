@@ -64,6 +64,14 @@ class CommentViewController: UIViewController {
         CommentService.fetchComments(forPost: post.postId, completion: { (comments) in
             self.comments = comments
             self.tableView.reloadData()
+            
+            if !self.comments.isEmpty {
+                
+                let endIndex = IndexPath(row: self.comments.count - 1, section: 0)
+                
+                self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+            }
+            
         })
     }
     
@@ -83,9 +91,10 @@ class CommentViewController: UIViewController {
             target: self, action: #selector(handleBack))
         
         view.addSubview(tableView)
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 0)
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 60, paddingRight: 0)
         tableView.register(CommentCell.self, forCellReuseIdentifier: CellID_CommentCell)
         tableView.keyboardDismissMode = .interactive
+    
     }
 }
 
@@ -141,7 +150,7 @@ extension CommentViewController: CommentInputAccessoryViewDelegate {
                     print("DEBUG: Error of upload posts \(error.localizedDescription)")
                     return
                 }
-                view.clearTextTyped()
+                view.resetTextView()
                 
                 NotificationService.uploadNotification(fromCurrentUser: user, toUser: post.ownerId, type: .comment, post: post)
             })
