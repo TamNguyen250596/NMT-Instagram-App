@@ -62,6 +62,7 @@ class SenderCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: Helpers
     func configureUI() {
         guard let viewModel = viewModel else {return}
         

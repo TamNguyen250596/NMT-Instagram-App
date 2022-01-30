@@ -32,6 +32,7 @@ struct PostService {
     
     static func fetchAllPosts(completion: @escaping ([Post]) -> Void) {
         Collection_Post.order(by: "timestamp", descending: true).getDocuments(completion: { (snapshot, error) in
+            
             guard let document = snapshot?.documents else {return}
             
             let posts = document.map({ Post(postId: $0.documentID, dictionary: $0.data()) })
@@ -46,6 +47,7 @@ struct PostService {
             .order(by: "timestamp", descending: true)
         
         query.getDocuments(completion: { (snapshot, error) in
+            
             guard let documents = snapshot?.documents else {return}
             
             let posts = documents.map({ Post(postId: $0.documentID, dictionary: $0.data())})
@@ -78,10 +80,11 @@ struct PostService {
     }
     
     static func updateUserFeedAfterFollowed(completion: @escaping ([Post]) -> Void) {
-        guard let cuurentUid = Auth.auth().currentUser?.uid else {return}
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
         var posts = [Post]()
         
-        Collection_User.document(cuurentUid).collection(User_Feeds).getDocuments(completion: {(snapshot, _) in
+        Collection_User.document(currentUid).collection(User_Feeds).getDocuments(completion: {(snapshot, _) in
+            
             guard let documents = snapshot?.documents else {return}
             
             let postIDs = documents.map({ $0.documentID })
@@ -111,16 +114,17 @@ struct PostService {
     }
     
     private static func sharePostToFollower(postId: String) {
-        guard let cuurentUid = Auth.auth().currentUser?.uid else {return}
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
         
-        Collection_Followers.document(cuurentUid).collection(User_Followers).getDocuments(completion: { (snapshots, _) in
+        Collection_Followers.document(currentUid).collection(User_Followers).getDocuments(completion: { (snapshots, _) in
+            
             guard let documents = snapshots?.documents else {return}
             
             documents.forEach({ (document) in
                 
                 Collection_User.document(document.documentID).collection(User_Feeds).document(postId).setData([:])
             })
-            Collection_User.document(cuurentUid).collection(User_Feeds).document(postId).setData([:])
+            Collection_User.document(currentUid).collection(User_Feeds).document(postId).setData([:])
         })
     }
     

@@ -13,7 +13,6 @@ class ProfileViewController: UICollectionViewController {
     private var posts = [Post]()
     private var user: User
         
-    
     //MARK: View cycle
     init(user: User) {
         self.user = user
@@ -128,6 +127,7 @@ extension ProfileViewController: ProfileHeaderDelegate {
         
         if user.isCurrentUser {
             print("DEBUG: Profile of the current account")
+            
         } else if user.isFollowed {
             UserService.unfollow(uid: user.uid, completion: { (error) in
                 self.user.isFollowed = false
@@ -136,6 +136,7 @@ extension ProfileViewController: ProfileHeaderDelegate {
                 
                 PostService.compilePostID(uid: user.uid, didFollow: false)
             })
+            
         } else {
             UserService.follow(uid: user.uid, completion: { (error) in
                 self.user.isFollowed = true
@@ -152,7 +153,7 @@ extension ProfileViewController: ProfileHeaderDelegate {
     func handleEventFromChatButton(_profileHeader: HeaderProfileCell, didTapActionButtonFor user: User) {
         showLoader(true)
         
-        MessageService.createMessageID(to: user, completiion: { (key) in
+        MessageService.createMessageID(to: user, completion: { (key) in
             
             let targetVC = ChatViewController()
             targetVC.receivedUser = user

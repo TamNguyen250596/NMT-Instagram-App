@@ -26,6 +26,7 @@
 		E9541B6127A17E0E00526F76 /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B6027A17E0D00526F76 /* SenderCell.swift */; };
 		E9541B6327A1819100526F76 /* ChatCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B6227A1819000526F76 /* ChatCellViewModel.swift */; };
 		E9541B6927A2813D00526F76 /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9541B6827A2813D00526F76 /* ReceiverCell.swift */; };
+		E9541B7927A6A43900526F76 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9541B7827A6A43900526F76 /* icon.png */; };
 		E979725D2789C0090055F80A /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979725C2789C0090055F80A /* ProfileCell.swift */; };
 		E97972602789C0620055F80A /* HeaderProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979725F2789C0620055F80A /* HeaderProfileCell.swift */; };
 		E9797265278BC1DA0055F80A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9797264278BC1D90055F80A /* UserService.swift */; };
@@ -89,6 +90,7 @@
 		E9541B6027A17E0D00526F76 /* SenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		E9541B6227A1819000526F76 /* ChatCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellViewModel.swift; sourceTree = "<group>"; };
 		E9541B6827A2813D00526F76 /* ReceiverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
+		E9541B7827A6A43900526F76 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		E979725C2789C0090055F80A /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		E979725F2789C0620055F80A /* HeaderProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCell.swift; sourceTree = "<group>"; };
 		E9797264278BC1D90055F80A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -255,13 +257,6 @@
 			path = TextFileds;
 			sourceTree = "<group>";
 		};
-		E9AB233A2785913A00C5CF6F /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Buttons;
-			sourceTree = "<group>";
-		};
 		E9E78E5A27828F4500FD2283 = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +292,8 @@
 		E9E78E7B27828F7200FD2283 /* Utilies */ = {
 			isa = PBXGroup;
 			children = (
+				E9AB23242783F1D100C5CF6F /* Extensions.swift */,
+				E9AB231C2783E10300C5CF6F /* Constants.swift */,
 			);
 			path = Utilies;
 			sourceTree = "<group>";
@@ -350,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				E9286EFF278E7EDE00E90C25 /* TextViews */,
-				E9AB233A2785913A00C5CF6F /* Buttons */,
 				E9AB233727858E2200C5CF6F /* TextFileds */,
 				E9AB2334278571DE00C5CF6F /* Backgrounds */,
 				E9AB231E2783E21100C5CF6F /* Cells */,
@@ -363,8 +359,6 @@
 		E9E78E8027828F8300FD2283 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E9AB231C2783E10300C5CF6F /* Constants.swift */,
-				E9AB23242783F1D100C5CF6F /* Extensions.swift */,
 				E98E72892787FB3F0087A64C /* AuthorIDs.swift */,
 				E9797266278BC3E80055F80A /* User.swift */,
 				E901077C278FBE6C00D0936A /* Post.swift */,
@@ -384,6 +378,7 @@
 				E9E78E6F27828F4800FD2283 /* Assets.xcassets */,
 				E9E78E7127828F4800FD2283 /* LaunchScreen.storyboard */,
 				E9E78E7427828F4800FD2283 /* Info.plist */,
+				E9541B7827A6A43900526F76 /* icon.png */,
 			);
 			path = Default;
 			sourceTree = "<group>";
@@ -448,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9541B7927A6A43900526F76 /* icon.png in Resources */,
 				E9EF613D2787E18F006E3DCD /* GoogleService-Info.plist in Resources */,
 				E9E78E7327828F4800FD2283 /* LaunchScreen.storyboard in Resources */,
 				E9E78E7027828F4800FD2283 /* Assets.xcassets in Resources */,

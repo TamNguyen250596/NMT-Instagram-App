@@ -21,7 +21,7 @@ class RegisterVC: UIViewController {
         return btn
     }()
     
-    private let emialTextField: UITextField = {
+    private let emailTextField: UITextField = {
         let textField = CustomTextField(placeholder: "Email")
         return textField
     }()
@@ -67,7 +67,7 @@ class RegisterVC: UIViewController {
     
     //MARK: Actions
     @objc func handleSignUp() {
-        guard let email = emialTextField.text else {return}
+        guard let email = emailTextField.text else {return}
         guard let password =  passwordTextField.text else {return}
         guard let fullName = fullNameTextField.text else {return}
         guard let userName = userNameTextField.text else {return}
@@ -89,8 +89,8 @@ class RegisterVC: UIViewController {
     }
     
     @objc func textDidChange(sender: UITextField) {
-        if sender == emialTextField {
-            viewModel.email = emialTextField.text
+        if sender == emailTextField {
+            viewModel.email = emailTextField.text
         } else if sender == passwordTextField {
             viewModel.password = passwordTextField.text
         } else if sender == fullNameTextField {
@@ -127,7 +127,7 @@ class RegisterVC: UIViewController {
         pickUpImgBtn.setDimensions(height: 140, width: 140)
         pickUpImgBtn.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
-        let stackView = UIStackView(arrangedSubviews: [emialTextField, passwordTextField, fullNameTextField, userNameTextField, signUpBtn])
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullNameTextField, userNameTextField, signUpBtn])
         stackView.axis = .vertical
         stackView.spacing = 20
         
@@ -140,7 +140,7 @@ class RegisterVC: UIViewController {
     }
     
     func addNotificationObsers() {
-        emialTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
         fullNameTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
         userNameTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
@@ -210,6 +210,7 @@ extension RegisterVC: UIImagePickerControllerDelegate, UINavigationControllerDel
             title: "Take Photo",
             style: .default,
             handler: { [weak self] _ in
+                
                 if let weakSelf = self {
                     weakSelf.takePhotoWithCamera()
                 }
@@ -220,6 +221,7 @@ extension RegisterVC: UIImagePickerControllerDelegate, UINavigationControllerDel
             title: "Choose From Library",
             style: .default,
             handler: { [weak self] _ in
+                
                 if let weakSelf = self {
                     weakSelf.choosePhotoFromLibrary()
                 }

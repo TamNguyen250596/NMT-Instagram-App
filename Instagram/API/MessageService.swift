@@ -9,7 +9,7 @@ import Firebase
 
 struct MessageService {
     
-    static func createMessageID(to receiver: User, completiion: @escaping (String) -> Void) {
+    static func createMessageID(to receiver: User, completion: @escaping (String) -> Void) {
         
         guard let currentUid = Auth.auth().currentUser?.uid else {return}
         var key = ""
@@ -19,7 +19,7 @@ struct MessageService {
             
             if let availableKey = snapshot?.data()?["messageId"] as? String {
                 
-                completiion(availableKey)
+                completion(availableKey)
                 
                 return
                 
@@ -53,7 +53,7 @@ struct MessageService {
                                 return
                             }
                             
-                            completiion(key)
+                            completion(key)
                             
                         })
                         

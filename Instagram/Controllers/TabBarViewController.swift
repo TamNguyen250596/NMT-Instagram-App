@@ -44,6 +44,7 @@ class TabBarViewController: UITabBarController {
     func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         UserService.fetchUser(withUserID: uid) { (user) in
+            
             self.user = user
         }
     }
@@ -55,6 +56,7 @@ class TabBarViewController: UITabBarController {
             print("DEBUG: Failed to signed out")
         }
     }
+    
     //MARK: Helper functions
     func createTabSection(targetVC: UIViewController, titleTabbar:String, imageTabbar: String) -> UINavigationController {
         let targetVC = UINavigationController(rootViewController: targetVC)
@@ -91,7 +93,7 @@ class TabBarViewController: UITabBarController {
         viewControllers = [targetOne, targetTwo, targetThree, targetFour, targetFive]
     }
     
-    func didFinishPickingMeida(_ picker: YPImagePicker) {
+    func didFinishPickingMedia(_ picker: YPImagePicker) {
         picker.didFinishPicking(completion: { (items, _) in
             picker.dismiss(animated: true, completion: nil)
             guard let selectedImage = items.singlePhoto?.image else {return}
@@ -135,7 +137,7 @@ extension TabBarViewController: UITabBarControllerDelegate {
             picker.modalPresentationStyle = .fullScreen
             present(picker, animated: true, completion: nil)
             
-            didFinishPickingMeida(picker)
+            didFinishPickingMedia(picker)
         }
         
         return true

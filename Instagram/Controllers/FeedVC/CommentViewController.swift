@@ -120,6 +120,7 @@ extension CommentViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let uid = comments[indexPath.row].uid
         UserService.fetchUser(withUserID: uid, completion: { (user) in
+            
             let targetVC = ProfileViewController(user: user)
             self.navigationController?.pushViewController(targetVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
@@ -132,11 +133,12 @@ extension CommentViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let comment = comments[indexPath.row]
         let viewModel = CommentCellViewModel(comment: comment)
-        let height = viewModel.dynamicCellHeigh(forWidth: view.frame.width)
+        let height = viewModel.dynamicCellHeight(forWidth: view.frame.width)
         return height
     }
 }
 
+//MARK: CommentInputAccessoryViewDelegate
 extension CommentViewController: CommentInputAccessoryViewDelegate {
 
     func handleEventFromPostButton(from view: CommentInputAccessoryView, withComment comment: String) {
@@ -146,8 +148,9 @@ extension CommentViewController: CommentInputAccessoryViewDelegate {
         CommentService.postComment(
             postID: post.postId, user: user, comment: comment,
             completion: { (error) in
+                
                 if let error = error {
-                    print("DEBUG: Error of upload posts \(error.localizedDescription)")
+                    print("DEBUG: Error of upload comments \(error.localizedDescription)")
                     return
                 }
                 view.resetTextView()
