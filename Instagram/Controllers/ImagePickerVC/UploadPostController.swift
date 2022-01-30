@@ -48,6 +48,7 @@ class UploadPostController: UIViewController {
     }
     var user: User?
     weak var delegate: UploadPostDelegate?
+    
     //MARK: View cycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -27,6 +27,7 @@ class NotificationViewController: UITableViewController {
     //MARK: API
     func fetchNotifications() {
         NotificationService.fetchNotifications(completion: { (notifications) in
+            
             self.notifications = notifications
             self.checkIfUsersFollowed()
         })
@@ -34,6 +35,7 @@ class NotificationViewController: UITableViewController {
     
     func checkIfUsersFollowed() {
         notifications.forEach({ (notification) in
+            
             guard notification.type == .follow else {return}
             
             UserService.checkIfUserIsFollowed(uid: notification.uid, completion: { (isFollowed) in
@@ -67,6 +69,7 @@ class NotificationViewController: UITableViewController {
     }
 }
 
+//MARK: Table view data source
 extension NotificationViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
@@ -82,6 +85,7 @@ extension NotificationViewController {
     }
 }
 
+//MARK: Table view delegate
 extension NotificationViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userId = notifications[indexPath.row].uid
@@ -96,6 +100,7 @@ extension NotificationViewController {
     }
 }
 
+//MARK: NotificationCellDelegate
 extension NotificationViewController: NotificationCellDelegate {
     
     func handleEventFromFollowButton(cell: NotificationCell, wantsToFollow uid: String) {

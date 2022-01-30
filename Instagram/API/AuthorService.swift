@@ -24,7 +24,7 @@ struct AuthorService {
         GIDSignIn.sharedInstance.signIn(with: config, presenting: presentingVC, callback: { (user, error) in
             
             if let error = error {
-                print("DEBUG failed to user \(error.localizedDescription)")
+                print("DEBUG failed to login user \(error.localizedDescription)")
                 return
               }
             
@@ -37,7 +37,7 @@ struct AuthorService {
             Auth.auth().signIn(with: credential, completion: { (authResult, error) in
                 
                 if let error = error {
-                    print("DEBUG failed to user \(error.localizedDescription)")
+                    print("DEBUG failed to login user \(error.localizedDescription)")
                     return
                   }
                 
@@ -50,9 +50,6 @@ struct AuthorService {
                 "profileImageUrl": authResult.user.photoURL?.absoluteString ?? "",
                 "uid": authResult.user.uid,
                 "username": authResult.user.displayName ?? ""]
-                
-
-                print("successfully saved - let's login")
                                                               
                 Collection_User.document(uid).setData(data, completion: completion)
             })
@@ -68,7 +65,7 @@ struct AuthorService {
         Auth.auth().signIn(with: credential, completion: { (authResult, error) in
             
             if let error = error {
-                print("DEBUG failed to user \(error.localizedDescription)")
+                print("DEBUG failed to login user \(error.localizedDescription)")
                 return
               }
             
@@ -81,9 +78,6 @@ struct AuthorService {
             "profileImageUrl": authResult.user.photoURL?.absoluteString ?? "",
             "uid": authResult.user.uid,
             "username": authResult.user.displayName ?? ""]
-            
-
-            print("successfully saved - let's login")
                                                           
             Collection_User.document(uid).setData(data, completion: completion)
         })
@@ -95,18 +89,20 @@ struct AuthorService {
         ImageUploader.uploadImage(image: withCredential.profileImage, completion: { (imgUrl) in
             
             Auth.auth().createUser(withEmail: withCredential.email, password: withCredential.password, completion: { (result, error) in
+                
                 if let error = error {
-                    print("DEBUG failed to user \(error.localizedDescription)")
+                    print("DEBUG failed to create user \(error.localizedDescription)")
                     return
                 }
                 
                 guard let uid = result?.user.uid else {return}
                 
-                let data: [String: Any] = ["email": withCredential.email,
-                                           "fullname": withCredential.fullName,
-                                           "profileImageUrl": imgUrl,
-                                           "uid": uid,
-                                           "username": withCredential.userName]
+                let data: [String: Any] =
+                ["email": withCredential.email,
+                 "fullname": withCredential.fullName,
+                 "profileImageUrl": imgUrl,
+                 "uid": uid,
+                 "username": withCredential.userName]
                 
                 Collection_User.document(uid).setData(data, completion: completion)
             })

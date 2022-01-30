@@ -9,38 +9,38 @@ import Firebase
 
 struct LikeService {
     static func like(forPost post: Post, user: User, completion: @escaping CompletionHandlerOptionalErrorToVoid) {
-        guard let cuurentUid = Auth.auth().currentUser?.uid else {return}
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
         
         let data : [String: Any] = ["timestamp": Timestamp(date: Date()),
-                                    "uid": cuurentUid,
+                                    "uid": currentUid,
                                     "imageUrl": user.profileImage,
                                     "userName": user.userName]
         
         Collection_Post.document(post.postId).updateData(["likes": post.likes + 1])
         
-        Collection_Post.document(post.postId).collection(Post_Likes).document(cuurentUid).setData(data, completion:{
+        Collection_Post.document(post.postId).collection(Post_Likes).document(currentUid).setData(data, completion:{
             (error) in
             
-            Collection_User.document(cuurentUid).collection(User_Likes).document(post.postId).setData([:], completion: completion)
+            Collection_User.document(currentUid).collection(User_Likes).document(post.postId).setData([:], completion: completion)
         })
     }
     
     static func unlike(forPost post: Post, completion: @escaping CompletionHandlerOptionalErrorToVoid) {
-        guard let cuurentUid = Auth.auth().currentUser?.uid else {return}
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
         
         Collection_Post.document(post.postId).updateData(["likes": post.likes - 1])
         
-        Collection_Post.document(post.postId).collection(Post_Likes).document(cuurentUid).delete(completion: { (error) in
+        Collection_Post.document(post.postId).collection(Post_Likes).document(currentUid).delete(completion: { (error) in
         
-            Collection_User.document(cuurentUid).collection(User_Likes).document(post.postId).delete(completion: completion)
+            Collection_User.document(currentUid).collection(User_Likes).document(post.postId).delete(completion: completion)
         })
     }
     
     static func checkIfUserLiked(forPost post: Post, completion: @escaping CompletionHandlerBoolToVoid) {
-        guard let cuurentUid = Auth.auth().currentUser?.uid else {return}
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
         guard post.likes > 0 else {return}
         
-        Collection_User.document(cuurentUid).collection(User_Likes).document(post.postId).getDocument(completion: { (snapshot, error) in
+        Collection_User.document(currentUid).collection(User_Likes).document(post.postId).getDocument(completion: { (snapshot, error) in
             guard let isLiked = snapshot?.exists else {return}
             completion(isLiked)
         })

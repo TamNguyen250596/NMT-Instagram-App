@@ -162,7 +162,7 @@ extension ChatViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let message = messages[indexPath.row]
         let viewModel = ChatCellViewModel(message: message)
-        let height = viewModel.dynamicCellHeigh(forWidth: view.frame.width)
+        let height = viewModel.dynamicCellHeight(forWidth: view.frame.width)
         return height
     }
     

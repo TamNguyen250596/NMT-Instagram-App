@@ -25,6 +25,7 @@ class UsersLikedViewController: UITableViewController {
         guard let post = post else {return}
         
         LikeService.fetchUsersLiked(forPost: post, completion: { (liked) in
+            
             self.liked = liked
             self.tableView.reloadData()
         })
@@ -55,6 +56,7 @@ extension UsersLikedViewController {
     }
 }
 
+//MARK: table view delegate
 extension UsersLikedViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -62,6 +64,7 @@ extension UsersLikedViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         UserService.fetchUser(withUserID: userId, completion: { (user) in
+            
             let targetVC = ProfileViewController(user: user)
             self.navigationController?.pushViewController(targetVC, animated: true)
         })

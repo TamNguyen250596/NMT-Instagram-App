@@ -23,7 +23,7 @@ class ResetPasswordVC: UIViewController {
         return img
     }()
     
-    private let emialTextField = CustomTextField(placeholder: "Email")
+    private let emailTextField = CustomTextField(placeholder: "Email")
     
     private lazy var resetPassBtn: UIButton = {
         let btn = UIButton(type: .system)
@@ -51,7 +51,7 @@ class ResetPasswordVC: UIViewController {
     
     //MARK: Actions
     @objc func handleResetPass() {
-        guard let email = emialTextField.text else {return}
+        guard let email = emailTextField.text else {return}
         
         showLoader(true)
         AuthorService.resetPassword(newEmail: email, completion: { (error) in
@@ -70,8 +70,8 @@ class ResetPasswordVC: UIViewController {
     }
     
     @objc func textDidChange(sender: UITextField) {
-        if sender == emialTextField {
-            viewModel.email = emialTextField.text
+        if sender == emailTextField {
+            viewModel.email = emailTextField.text
         }
         
         if viewModel.formIsValid {
@@ -101,7 +101,7 @@ class ResetPasswordVC: UIViewController {
         iconImage.setDimensions(height: 80, width: 120)
         iconImage.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
-        let stackView = UIStackView(arrangedSubviews: [emialTextField, resetPassBtn])
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, resetPassBtn])
         stackView.axis = .vertical
         stackView.spacing = 20
         
@@ -109,14 +109,14 @@ class ResetPasswordVC: UIViewController {
         stackView.anchor(top: iconImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
         if let email = email {
-            emialTextField.text = email
+            emailTextField.text = email
             viewModel.email = email
-            textDidChange(sender: emialTextField)
+            textDidChange(sender: emailTextField)
         }
     }
     
     func addNotificationObsers() {
-        emialTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(textDidChange(sender:)), for: .editingChanged)
     }
     
 }

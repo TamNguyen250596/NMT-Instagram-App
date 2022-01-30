@@ -59,7 +59,6 @@ class LoginVC: UIViewController {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "google-icon"), for: .normal)
         btn.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
-        
         return btn
     }()
     
