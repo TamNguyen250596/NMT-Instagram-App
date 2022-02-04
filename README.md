@@ -1,6 +1,7 @@
 # NMT-Instagram-App
 
 The app helps people to catch up with each other. In additional, the app inludes a lot of amazing features, for instance: 
+
  Logging in by Gamil or Facebook.
  Showing the number of likes.
  Showing comments. 
