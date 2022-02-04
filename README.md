@@ -5,11 +5,9 @@ The app helps people to catch up with each other. In additional, the app inludes
  Logging in by Gamil or Facebook.
  
  Showing the number of likes.
- 
  Showing comments. 
- 
  Showing posts according to the following users.
- 
+
  Toggling search bar to show pictures or to search users. 
  
  Editing photos of a post. 
